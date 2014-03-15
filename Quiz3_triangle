@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Quiz3
+{
+    class Triangle
+    {
+        public double Point1_X;
+        public double Point1_Y;
+        public double Point2_X;
+        public double Point2_Y;
+        public double Point3_X;
+        public double Point3_Y;
+
+        private double DistanceBetweenPoint(double X1,double X2,double Y1,double Y2)
+        {
+            return Math.Sqrt((X1 - X2) * (X1 - X2) + (Y1 - Y2) * (Y1 - Y2));
+        }
+
+        public bool isValid()
+        {
+            double s1 = DistanceBetweenPoint(Point1_X, Point2_X, Point1_Y, Point2_Y);
+            double s2 = DistanceBetweenPoint(Point2_X, Point3_X, Point2_Y, Point3_Y);
+            double s3 = DistanceBetweenPoint(Point1_X, Point3_X, Point1_Y, Point3_Y);
+            if ((s1 + s2 >= s3) || (s2 + s3 >= s1) || (s1 + s3 >= s2))
+                return true;
+            else
+                return false;
+        }
+        public double Perimeter()
+        {
+            double s1 = DistanceBetweenPoint(Point1_X, Point2_X, Point1_Y, Point2_Y);
+            double s2 = DistanceBetweenPoint(Point2_X, Point3_X, Point2_Y, Point3_Y);
+            double s3 = DistanceBetweenPoint(Point1_X, Point3_X, Point1_Y, Point3_Y);
+            double P= s1 + s2 + s3;
+            return P;
+        }
+        public double Area()
+        {
+            double s1 = DistanceBetweenPoint(Point1_X, Point2_X, Point1_Y, Point2_Y);
+            double s2 = DistanceBetweenPoint(Point2_X, Point3_X, Point2_Y, Point3_Y);
+            double s3 = DistanceBetweenPoint(Point1_X, Point3_X, Point1_Y, Point3_Y);
+            double P = (s1 + s2 + s3)/2;
+            double S = Math.Sqrt(P * (P - s1) * (P - s2) * (P - s3));
+            return S;
+        }
+        public double RadiusOfCircumcircle()
+        {
+            double s1 = DistanceBetweenPoint(Point1_X, Point2_X, Point1_Y, Point2_Y);
+            double s2 = DistanceBetweenPoint(Point2_X, Point3_X, Point2_Y, Point3_Y);
+            double s3 = DistanceBetweenPoint(Point1_X, Point3_X, Point1_Y, Point3_Y);
+            double cosAlpha = ((s1 * s1) + (s3 * s3) - (s2 * s2)) / 2 * s1 * s2;
+            double sinAlpha = Math.Sqrt(1 - (cosAlpha * cosAlpha));
+            //double P = (s1 + s2 + s3) / 2;
+            //double S = Math.Sqrt(P * (P - s1) * (P - s2) * (P - s3));
+            double R =(0.5*s2)/sinAlpha;
+            return R;
+        }
+        public bool isRight()
+        {
+            double s1 = DistanceBetweenPoint(Point1_X, Point2_X, Point1_Y, Point2_Y);
+            double s2 = DistanceBetweenPoint(Point2_X, Point3_X, Point2_Y, Point3_Y);
+            double s3 = DistanceBetweenPoint(Point1_X, Point3_X, Point1_Y, Point3_Y);
+            if (((s1 * s1) + (s2 * s2) == (s3 * s3)) || ((s2 * s2) + (s3 * s3) == (s1 * s1)) || ((s1 * s1) + (s3 * s3) == (s2 * s2)))
+                return true;
+            else
+                return false;
+        }
+
+
+        
+    }
+}
